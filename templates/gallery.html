@@ -1,10 +1,24 @@
-{% if page.photo_gallery %}
-<div class="gallery">
-        {% for title, gallery in page.photo_gallery %}
-            <h1>{{ title }}</h1>
-                {% for name, photo, thumb, exif, caption in gallery %}
-                        <a href="{{ SITEURL }}/{{ photo }}" title="{{ name }}" exif="{{ exif }}" caption="{{ caption }}"><img src="{{ SITEURL }}/{{ thumb }}"></a>
-                {% endfor %}
-        {% endfor %}
-</div>
-{% endif %}
+{% extends "base.html" %}
+{% block title %} &ndash; {{ page.title }}{% endblock %}
+
+{% block content %}
+<article class="single">
+  <header>
+    <h1 id="{{ page.slug }}">{{ page.title }}</h1>
+  </header>
+  <div>
+    {{ page.content }}
+    {% if page.photo_gallery %}
+    <div class="gallery">
+      {% for title, gallery in page.photo_gallery %}
+      <h1>{{ title }}</h1>
+      {% for name, photo, thumb, exif, caption in gallery %}
+      <a href="{{ SITEURL }}/{{ photo }}" title="{{ name }}" exif="{{ exif }}" caption="{{ caption }}"><img src="{{ SITEURL }}/{{ thumb }}"></a>
+      {% endfor %}
+      {% endfor %}
+    </div>
+    {% endif %}
+    
+  </div>
+</article>
+{% endblock %}
