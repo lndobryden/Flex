@@ -2,14 +2,18 @@
 {% block title %} &ndash; {{ page.title }}{% endblock %}
 
 {% block content %}
-<article class="single">
-  <header>
-    <h1 id="{{ page.slug }}">{{ page.title }}</h1>
-  </header>
+<article class="single container">
+  <div class="row">
+    <header>
+      <div class="col-12 center">
+        <h1 id="{{ page.slug }}">{{ page.title }}</h1>
+      </div>
+    </header>
+  </div>
   <div>
     {{ page.content }}
     {% if page.photo_gallery %}
-    <div class="gallery container">
+    <div class="gallery">
       {% for title, gallery in page.photo_gallery %}
         <h1>{{ title }}</h1>
         {% for photo_row in gallery | batch(2) %}
