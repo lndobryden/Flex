@@ -9,16 +9,24 @@
   <div>
     {{ page.content }}
     {% if page.photo_gallery %}
-    <div class="gallery">
+    <div class="gallery container">
       {% for title, gallery in page.photo_gallery %}
-      <h1>{{ title }}</h1>
-      {% for name, photo, thumb, exif, caption in gallery %}
-      <a href="{{ SITEURL }}/{{ photo }}" title="{{ name }}" exif="{{ exif }}" caption="{{ caption }}"><img src="{{ SITEURL }}/{{ thumb }}"></a>
-      {% endfor %}
+        <h1>{{ title }}</h1>
+        {% for photo_row in gallery | batch(2) %}
+          <div class="row vertical-align">
+          {% for name, photo, thumb, exif, caption in photo_row %}
+            <div class="col-6 center">
+              <a href="{{ SITEURL }}/{{ photo }}" title="{{ name }}" exif="{{ exif }}" caption="{{ caption }}">
+                <img src="{{ SITEURL }}/{{ thumb }}">
+              </a>
+            </div>
+          {% endfor %}
+          </div>
+        {% endfor %}
       {% endfor %}
     </div>
     {% endif %}
-    
+
   </div>
 </article>
 {% endblock %}
